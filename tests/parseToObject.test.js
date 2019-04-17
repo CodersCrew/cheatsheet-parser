@@ -11,6 +11,7 @@ describe('parseToObject', () => {
                 name: 'React',
                 sections: [{
                     title: 'Creating components',
+                    pageTitle: 'one-element',
                     content: [{
                         title: 'Functional components',
                         code: 'import React from \'react\';\n\nconst MyComponent = (props) => {\n\treturn (\n\t\t<div>Hello World</div>\n\t);\n}\n\nexport default MyComponent;',
