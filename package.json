@@ -1,0 +1,11 @@
+{
+  "name": "cs-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Piotr Pietruszka",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.3"
+  }
+}
