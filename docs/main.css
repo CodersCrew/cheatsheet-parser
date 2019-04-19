@@ -52,7 +52,8 @@ small {
 }
 
 .container {
-    width: 1504px;
+    width: calc(100vw - 64px);
+    max-width: 1504px;
     margin: 0 auto;
 }
 
@@ -71,12 +72,14 @@ h1.name {
 
 .content {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .card {
     position: relative;
     width: calc(50% - 16px);
+    margin: 16px 0;
     padding: 24px 32px;
     border-radius: 16px;
     background-color: var(--white);
@@ -96,6 +99,7 @@ h1.name {
     border-radius: 0px 16px;
     background-color: var(--yellow);
     color: var(--white);
+    text-transform: uppercase;
 }
 
 .code {
@@ -107,6 +111,14 @@ h1.name {
     padding: 16px 24px;
 }
 
+.code:hover .copy-button {
+    opacity: 0.8;
+}
+
+.code:hover .copy-button:hover {
+    opacity: 1;
+}
+
 .copy-button {
     position: absolute;
     top: 16px;
@@ -116,6 +128,7 @@ h1.name {
     padding: 8px 16px;
     border-radius: 8px;
     background-color: var(--blue);
+    opacity: 0;
     cursor: pointer;
     transition: all 0.3s var(--ease-out-quart);
 }
@@ -175,4 +188,10 @@ h1.name {
     right: calc(50vw - 150px);
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 1200px) {
+    .card {
+        width: 100%;
+    }
 }
