@@ -16,3 +16,10 @@ export default MyComponent;
 ```
 Simple function that returns JSX.
 Example: https://www.google.pl/
+
+### Functional components
+```javascript
+const add = (a, b) => a + b;
+```
+Simple function that returns JSX.
+Example: https://www.google.pl/

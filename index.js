@@ -1,33 +1,23 @@
-const fs = require('fs').promises;
-const ejs = require("ejs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 const parseFolderToObject = require('./parser/parseFolderToObject');
+const parseObjectToHTML = require('./parser/parseObjectToHTML');
 
-const dir = path.join(__dirname, 'docs');
-
-function ejs2html(path, information) {
-    fs.readFile(path, 'utf8', function (err, data) {
-        if (err) { console.log(err); return false; }
-        const ejs_string = data,
-            template = ejs.compile(ejs_string),
-            html = template(information);
-
-        if (!fs.existsSync(dir)){
-            fs.mkdirSync(dir);
-        }
-
-        fs.writeFile(path + '.html', html, function(err) {
-            if(err) { console.log(err); return false }
-            return true;
-        });  
-    });
-}
+const docsPath = path.join(__dirname, 'docs');
 
 const main = async () => {
     const obj = await parseFolderToObject('/tests/testing-sets/one-element');
-    const file = await fs.promises.readFile(path.join(__dirname, 'template', 'index.ejs'), 'utf8');
-    ejs2html(path.join(dir, 'index'));
-    console.log(file);
+
+    const files = fs.readdirSync(docsPath);
+    for (const file of files) {
+        if (file.includes('.html')) {
+            fs.unlinkSync(path.join(docsPath, file));
+        }
+    }
+
+    for (let page of obj) {
+        await parseObjectToHTML(page.pageTitle, page);
+    }
 }
 
 main();

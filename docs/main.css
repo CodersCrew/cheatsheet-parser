@@ -1,0 +1,178 @@
+:root {
+    --background: #F2F3F8;
+    --text-primary: #121212;
+    --text-secondary: #7A7A7A;
+    --text-regular: #4A4A4A;
+    --white: #FFFFFF;
+    --blue: #3776D9;
+    --blue-hover: #5998FB;
+    --blue-active: #1554B7;
+    --yellow: #FEDB62;
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body {
+    background-color: var(--background);
+    font-family: 'Open Sans', 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-regular)
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: var(--text-regular);
+}
+
+b {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+small {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.container {
+    width: 1504px;
+    margin: 0 auto;
+}
+
+h1.name {
+    margin: 64px 0 40px;
+    text-align: center;
+}
+
+.section {
+    padding-bottom: 64px;
+}
+
+.section-title {
+    margin-bottom: 32px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    position: relative;
+    width: calc(50% - 16px);
+    padding: 24px 32px;
+    border-radius: 16px;
+    background-color: var(--white);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.language-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px 24px;
+    border-radius: 0px 16px;
+    background-color: var(--yellow);
+    color: var(--white);
+}
+
+.code {
+    position: relative;
+    width: 100%;
+    background-color: #212121;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 16px 24px;
+}
+
+.copy-button {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: var(--blue);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out-quart);
+}
+
+.copy-button:hover {
+    background-color: var(--blue-hover);
+}
+
+.copy-button:active {
+    background-color: var(--blue-active);
+}
+
+.copy-button i {
+    padding-right: 8px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.copy-button small {
+    color: var(--white);
+}
+
+.description {
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.example-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s var(--ease-out-quart);
+}
+
+.example-link:hover {
+    box-shadow: 0 2px 5px var(--text-primary);
+}
+
+.example-link:active {
+    box-shadow: 0 2px 1px var(--text-primary);
+}
+
+.example-link i {
+    padding-right: 8px;
+    color: var(--text-secondary);
+}
+
+.example-link b {
+    color: var(--text-secondary);
+}
+
+.toastify {
+    right: calc(50vw - 150px);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.8);
+}
