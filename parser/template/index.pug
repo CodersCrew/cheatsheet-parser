@@ -1,0 +1,63 @@
+- var snippetId = 0;
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title React cheat sheet
+    link(rel='stylesheet', href='./reset.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext', rel='stylesheet')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.8.1/css/all.css', integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf', crossorigin='anonymous')
+    link(rel='stylesheet', href='./prism.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css')
+    link(rel='stylesheet', href='./main.css')
+    style.
+  body
+    .container
+      h1.name React
+      for section, sectionIndex in sections
+        section.section
+        h2.section-title #{section.title}
+        section.content
+          for content, contentIndex in section.content
+            .card
+              h3.card-title #{content.title}
+              b.language-tag #{content.language}
+              .code
+                button.copy-button(data-snippet=sectionIndex + contentIndex)
+                  i.fas.fa-copy
+                  small Copy
+                pre
+                  code(class="language-"+content.language) #{content.code}
+              p.description #{content.description}
+              a.example-link(href=content.example, target='__blank')
+                i.fas.fa-link
+                b See example
+    script(type='text/javascript').
+      const snippets = !{JSON.stringify(snippets)}
+    script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/toastify-js')
+    script(type='text/javascript').
+      const copyToClipboard = str => {
+      const el = document.createElement("textarea");
+      el.value = str;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      };
+      const copyCode = ({ currentTarget: { dataset } }) => {
+      copyToClipboard(snippets[dataset.snippet]);
+      Toastify({
+      text: 'Code has been copied to clipboard',
+      gravity: 'bottom',
+      }).showToast();
+      };
+      const copyButtons = document.querySelectorAll('.copy-button');
+      copyButtons.forEach(btn => {
+      btn.addEventListener('click', copyCode);
+      });
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js')
+    for language in languages
+      script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-' + language + '.min.js')

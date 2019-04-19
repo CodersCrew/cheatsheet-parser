@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>React cheat sheet</title><link rel="stylesheet" href="./reset.css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"><link rel="stylesheet" href="./prism.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"><link rel="stylesheet" href="./main.css"><style></style></head><body><div class="container"><h1 class="name">React</h1><section class="section"></section><h2 class="section-title">Creating components</h2><section class="content"><div class="card"><h3 class="card-title">Functional components</h3><b class="language-tag">jsx</b><div class="code"><button class="copy-button" data-snippet="0"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-jsx">import React from 'react';
+
+const MyComponent = (props) =&gt; {
+    return (
+        &lt;div&gt;Hello World&lt;/div&gt;
+    );
+}
+
+export default MyComponent;</code></pre></div><p class="description">Simple function that returns JSX.</p><a class="example-link" href="https://reactjs.org/docs/components-and-props.html" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div><div class="card"><h3 class="card-title">Class-based components</h3><b class="language-tag">jsx</b><div class="code"><button class="copy-button" data-snippet="1"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-jsx">import React, { Component } from 'react';
+
+class MyComponent extends Component {
+    render() {
+        return (
+            &lt;div&gt;Hello World&lt;/div&gt;
+        );
+    }
+}
+
+export default MyComponent;</code></pre></div><p class="description">JavaScript class that extends from the Component class. In class-based components we can use state and lifecycle methods.</p><a class="example-link" href="https://reactjs.org/docs/components-and-props.html" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div></section></div><script type="text/javascript">const snippets = ["import React from 'react';\n\nconst MyComponent = (props) => {\n    return (\n        <div>Hello World</div>\n    );\n}\n\nexport default MyComponent;","import React, { Component } from 'react';\n\nclass MyComponent extends Component {\n    render() {\n        return (\n            <div>Hello World</div>\n        );\n    }\n}\n\nexport default MyComponent;"]</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script><script type="text/javascript">const copyToClipboard = str => {
+const el = document.createElement("textarea");
+el.value = str;
+document.body.appendChild(el);
+el.select();
+document.execCommand('copy');
+document.body.removeChild(el);
+};
+const copyCode = ({ currentTarget: { dataset } }) => {
+copyToClipboard(snippets[dataset.snippet]);
+Toastify({
+text: 'Code has been copied to clipboard',
+gravity: 'bottom',
+}).showToast();
+};
+const copyButtons = document.querySelectorAll('.copy-button');
+copyButtons.forEach(btn => {
+btn.addEventListener('click', copyCode);
+});</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-jsx.min.js"></script></body></html>
