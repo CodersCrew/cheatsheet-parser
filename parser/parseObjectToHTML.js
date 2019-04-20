@@ -5,10 +5,15 @@ const pug = require('pug');
 const outputFolder = path.join(__dirname, '..', 'docs');
 const templateFile = path.join(__dirname, 'template', 'index.pug');
 
-const getSnippets = (sections) => sections.reduce((a, c) => {
-    a = [ ...a, ...c.content.map(el => el.code) ];
-    return a;
-}, []);
+const getSnippets = (sections) => sections.reduce((sectionAcc, sectionCurr, sectionIndex) => {
+    const contentSnippets = sectionCurr.content.reduce((contentAcc, contentCurr, contentIndex) => {
+        contentAcc[`${sectionIndex}${contentIndex}`] = contentCurr.code;
+        return contentAcc;
+    }, {});
+
+    sectionAcc = { ...sectionAcc, ...contentSnippets };
+    return sectionAcc;
+}, {});
 
 const getLanguages = (sections) => sections.reduce((a, c) => {
     a = [ ...a, ...c.content.map(el => el.language) ];

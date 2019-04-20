@@ -1,5 +1,3 @@
-- var snippetId = 0;
-
 doctype html
 html(lang='en')
   head
@@ -16,7 +14,7 @@ html(lang='en')
     style.
   body
     .container
-      h1.name React
+      h1.name #{name}
       for section, sectionIndex in sections
         section.section
         h2.section-title #{section.title}
@@ -26,15 +24,16 @@ html(lang='en')
               h3.card-title #{content.title}
               b.language-tag #{content.language}
               .code
-                button.copy-button(data-snippet=sectionIndex + contentIndex)
+                button.copy-button(data-snippet=`${sectionIndex}${contentIndex}`)
                   i.fas.fa-copy
                   small Copy
                 pre
                   code(class="language-"+content.language) #{content.code}
               p.description #{content.description}
-              a.example-link(href=content.example, target='__blank')
-                i.fas.fa-link
-                b See example
+              if content.example
+                a.example-link(href=content.example, target='__blank')
+                  i.fas.fa-link
+                  b See example
     script(type='text/javascript').
       const snippets = !{JSON.stringify(snippets)}
     script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/toastify-js')

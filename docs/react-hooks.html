@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title>React cheat sheet</title><link rel="stylesheet" href="./reset.css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"><link rel="stylesheet" href="./prism.css"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"><link rel="stylesheet" href="./main.css"><style></style></head><body><div class="container"><h1 class="name">React Hooks</h1><section class="section"></section><h2 class="section-title">Functionalities from class-based components</h2><section class="content"><div class="card"><h3 class="card-title">componentDidMount()</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="00"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">useEffect(() =&gt; {
+    /* componendDidMount function content */
+}, []);</code></pre></div><p class="description">Function, that works like `componentDidMount()` in class-based components.</p></div><div class="card"><h3 class="card-title">componentDidUpdate()</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="01"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">const mounted = useRef();
+useEffect(() =&gt; {
+    if (!mounted.current) {
+        mounted.current = true;
+        return;
+    }
+    /* componentDidUpdate function content */
+}, []);</code></pre></div><p class="description">Function, that works like `componentDidUpdate()` in class-based components.</p></div><div class="card"><h3 class="card-title">componentDidMount() + componentDidUpdate()</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="02"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">useEffect(() =&gt; {
+    /* componendDidMount + componendDidUpdate function content */
+});</code></pre></div><p class="description">Function, that works like combination of `componentDidMount()` and `componentDidUpdate()` in class-based components.</p></div><div class="card"><h3 class="card-title">componentWillUnmount()</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="03"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">useEffect(() =&gt; {
+  return () =&gt; {
+    /* componentWillUnmount function content */
+  }
+}, []);</code></pre></div><p class="description">Function, that works like `componentWillUnmount()` in class-based components.</p></div><div class="card"><h3 class="card-title">forceUpdate()</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="04"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">const [ignored, forceUpdate] = useReducer(x =&gt; x + 1, 0);</code></pre></div><p class="description">Function, that works like `this.forceUpdate()` in class-based components.</p></div></section><section class="section"></section><h2 class="section-title">Other hooks</h2><section class="content"><div class="card"><h3 class="card-title">useClientRect</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="10"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">function useClientRect() {
+  const [rect, setRect] = useState(null);
+  const ref = useCallback(node =&gt; {
+    if (node !== null) {
+      setRect(node.getBoundingClientRect());
+    }
+  }, []);
+  return [rect, ref];
+}</code></pre></div><p class="description">Measure the element on the first rendering.</p><a class="example-link" href="https://codesandbox.io/s/1rzwy8r147" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div><div class="card"><h3 class="card-title">useImageClientRect</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="11"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">function useImageClientRect() {
+  const [rect, setRect] = useState({});
+  const ref = useCallback(node =&gt; {
+    if (node !== null) {
+      node.addEventListener(&quot;load&quot;, () =&gt; {
+        setRect(node.getBoundingClientRect());
+      });
+    }
+  }, []);
+  return [rect, ref];
+}</code></pre></div><p class="description">Measure the image element after its first loading into the DOM.</p><a class="example-link" href="https://codesandbox.io/s/qz3k091q26" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div><div class="card"><h3 class="card-title">useClientRectObserver</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="12"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">function useClientRectObserver() {
+  const ref = useRef();
+  const [rect, setRect] = useState(null);
+
+  useEffect(() =&gt; {
+    const resizeObserver = new ResizeObserver(entries =&gt; {
+      if (!Array.isArray(entries) || !entries.length) {
+        return;
+      }
+
+      setRect(entries[0].contentRect);
+    });
+
+    resizeObserver.observe(ref.current);
+
+    return () =&gt; resizeObserver.unobserve(ref.current);
+  }, []);
+
+  return [rect, ref];
+}</code></pre></div><p class="description">Measure the element on the first rendering and every resize. That hook uses an experimental ResizeObserver. If you care about backwards compatibility use [resize-observer-polyfill](https://www.npmjs.com/package/resize-observer-polyfill).</p><a class="example-link" href="https://codesandbox.io/s/42ll22y4v0" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div><div class="card"><h3 class="card-title">useFetch</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="13"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">function useFetch(url, initialValue) {
+  const [data, setData] = useState(initialValue);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    setLoading(true);
+    fetch(url)
+      .then(res =&gt; res.json())
+      .then(setData)
+      .catch(setError)
+      .finally(() =&gt; setLoading(false));
+  }, [url]);
+
+  return [data, loading, error];
+}</code></pre></div><p class="description">Use browser Fetch API to send a request to the provided URL.</p><a class="example-link" href="https://codesandbox.io/s/9z9mmqo58y" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div><div class="card"><h3 class="card-title">usePrevious</h3><b class="language-tag">javascript</b><div class="code"><button class="copy-button" data-snippet="14"><i class="fas fa-copy"></i><small>Copy</small></button><pre><code class="language-javascript">function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() =&gt; {
+    ref.current = value;
+  });
+
+  return ref.current;
+}</code></pre></div><p class="description">Access to the previous state/props of the component.</p><a class="example-link" href="https://codesandbox.io/s/5w9n7wxjnk" target="__blank"><i class="fas fa-link"></i><b>See example</b></a></div></section></div><script type="text/javascript">const snippets = {"10":"function useClientRect() {\n  const [rect, setRect] = useState(null);\n  const ref = useCallback(node => {\n    if (node !== null) {\n      setRect(node.getBoundingClientRect());\n    }\n  }, []);\n  return [rect, ref];\n}","11":"function useImageClientRect() {\n  const [rect, setRect] = useState({});\n  const ref = useCallback(node => {\n    if (node !== null) {\n      node.addEventListener(\"load\", () => {\n        setRect(node.getBoundingClientRect());\n      });\n    }\n  }, []);\n  return [rect, ref];\n}","12":"function useClientRectObserver() {\n  const ref = useRef();\n  const [rect, setRect] = useState(null);\n\n  useEffect(() => {\n    const resizeObserver = new ResizeObserver(entries => {\n      if (!Array.isArray(entries) || !entries.length) {\n        return;\n      }\n\n      setRect(entries[0].contentRect);\n    });\n\n    resizeObserver.observe(ref.current);\n\n    return () => resizeObserver.unobserve(ref.current);\n  }, []);\n\n  return [rect, ref];\n}","13":"function useFetch(url, initialValue) {\n  const [data, setData] = useState(initialValue);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    setLoading(true);\n    fetch(url)\n      .then(res => res.json())\n      .then(setData)\n      .catch(setError)\n      .finally(() => setLoading(false));\n  }, [url]);\n\n  return [data, loading, error];\n}","14":"function usePrevious(value) {\n  const ref = useRef();\n\n  useEffect(() => {\n    ref.current = value;\n  });\n\n  return ref.current;\n}","00":"useEffect(() => {\n    /* componendDidMount function content */\n}, []);","01":"const mounted = useRef();\nuseEffect(() => {\n    if (!mounted.current) {\n        mounted.current = true;\n        return;\n    }\n    /* componentDidUpdate function content */\n}, []);","02":"useEffect(() => {\n    /* componendDidMount + componendDidUpdate function content */\n});","03":"useEffect(() => {\n  return () => {\n    /* componentWillUnmount function content */\n  }\n}, []);","04":"const [ignored, forceUpdate] = useReducer(x => x + 1, 0);"}</script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script><script type="text/javascript">const copyToClipboard = str => {
+const el = document.createElement("textarea");
+el.value = str;
+document.body.appendChild(el);
+el.select();
+document.execCommand('copy');
+document.body.removeChild(el);
+};
+const copyCode = ({ currentTarget: { dataset } }) => {
+copyToClipboard(snippets[dataset.snippet]);
+Toastify({
+text: 'Code has been copied to clipboard',
+gravity: 'bottom',
+}).showToast();
+};
+const copyButtons = document.querySelectorAll('.copy-button');
+copyButtons.forEach(btn => {
+btn.addEventListener('click', copyCode);
+});</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-javascript.min.js"></script></body></html>
